@@ -1,0 +1,242 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700;800&family=Inter:wght@400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.legacy-section {
+  background: white;
+  padding: 120px 80px;
+  position: relative;
+}
+
+.legacy-section::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  background: linear-gradient(to bottom, transparent 0%, #fdf2f8 100%);
+}
+
+.legacy-container {
+  max-width: 1600px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.legacy-content {
+  padding-right: 40px;
+}
+
+.icon-badge {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+  transition: all 0.3s ease;
+}
+
+.icon-badge:hover {
+  transform: rotate(5deg) scale(1.05);
+}
+
+.icon-emoji {
+  font-size: 2.8rem;
+}
+
+.legacy-title {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 40px;
+  line-height: 1.2;
+}
+
+.legacy-paragraph {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  color: #6c757d;
+  line-height: 1.8;
+  margin-bottom: 28px;
+}
+
+.legacy-paragraph:last-of-type {
+  margin-bottom: 0;
+}
+
+.legacy-image-wrapper {
+  position: relative;
+  height: 600px;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+}
+
+.legacy-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.legacy-image-wrapper:hover .legacy-image {
+  transform: scale(1.06);
+}
+
+/* ✅ FIXED HERE */
+.years-badge {
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+  background: linear-gradient(
+    135deg,
+    #5a1f1a 0%,
+    #7c2d12 50%,
+    #b8693d 100%
+  );
+  color: white;
+  padding: 36px 48px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 12px 40px rgba(90, 31, 26, 0.5);
+
+  /* 🔥 Safari Support */
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+
+  transition: all 0.3s ease;
+}
+
+.legacy-image-wrapper:hover .years-badge {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 50px rgba(90, 31, 26, 0.6);
+}
+
+.years-value {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 4rem;
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.years-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 500;
+  opacity: 0.95;
+  letter-spacing: 0.02em;
+}
+
+/* Responsive */
+@media (max-width: 1400px) {
+  .legacy-section {
+    padding: 100px 60px;
+  }
+
+  .legacy-container {
+    gap: 80px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .legacy-section {
+    padding: 80px 40px;
+  }
+
+  .legacy-container {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+
+  .legacy-content {
+    padding-right: 0;
+  }
+
+  .legacy-image-wrapper {
+    height: 500px;
+  }
+
+  .legacy-title {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .legacy-section {
+    padding: 60px 24px;
+  }
+
+  .legacy-title {
+    font-size: 2rem;
+    margin-bottom: 32px;
+  }
+
+  .legacy-paragraph {
+    font-size: 1rem;
+    margin-bottom: 24px;
+  }
+
+  .legacy-image-wrapper {
+    height: 400px;
+  }
+
+  .icon-badge {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 32px;
+  }
+
+  .icon-emoji {
+    font-size: 2.4rem;
+  }
+
+  .years-badge {
+    padding: 28px 36px;
+    bottom: 24px;
+    right: 24px;
+  }
+
+  .years-value {
+    font-size: 3rem;
+  }
+
+  .years-label {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .legacy-title {
+    font-size: 1.75rem;
+  }
+
+  .legacy-image-wrapper {
+    height: 350px;
+  }
+
+  .years-badge {
+    padding: 24px 32px;
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .years-value {
+    font-size: 2.5rem;
+  }
+}
