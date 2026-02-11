@@ -137,11 +137,18 @@ export default function HomePart2() {
           cursor: pointer;
           box-shadow: 0 6px 16px rgba(0,0,0,0.08);
           color: #374151;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .dr-filter-btn:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 12px 24px rgba(0,0,0,0.12);
         }
 
         .dr-filter-btn.active {
           background: #5b1a1d;
           color: #ffffff;
+          box-shadow: 0 8px 20px rgba(91, 26, 29, 0.3);
         }
 
         .dr-grid {
@@ -152,24 +159,44 @@ export default function HomePart2() {
           gap: 40px;
         }
 
+        /* ✨ ENHANCED CARD WITH SMOOTH HOVER */
         .dr-card {
           background: #ffffff;
           border-radius: 24px;
           overflow: hidden;
           box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+          cursor: pointer;
+          transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+          position: relative;
         }
 
+        /* 🎯 CARD POP EFFECT ON HOVER */
+        .dr-card:hover {
+          transform: translateY(-16px) scale(1.02);
+          box-shadow: 0 28px 60px rgba(91, 26, 29, 0.25);
+          z-index: 10;
+        }
+
+        /* 📸 IMAGE CONTAINER */
         .dr-image {
           position: relative;
           height: 250px;
+          overflow: hidden;
         }
 
+        /* 🔍 IMAGE ZOOM ON HOVER */
         .dr-image img {
           width: 100%;
           height: 100%;
           object-fit: cover;
+          transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
+        .dr-card:hover .dr-image img {
+          transform: scale(1.15);
+        }
+
+        /* GRADIENT OVERLAY */
         .dr-image::after {
           content: "";
           position: absolute;
@@ -178,6 +205,16 @@ export default function HomePart2() {
             to top,
             rgba(0,0,0,0.35),
             rgba(0,0,0,0.08),
+            transparent
+          );
+          transition: opacity 0.5s ease;
+        }
+
+        .dr-card:hover .dr-image::after {
+          background: linear-gradient(
+            to top,
+            rgba(0,0,0,0.5),
+            rgba(0,0,0,0.12),
             transparent
           );
         }
@@ -192,11 +229,18 @@ export default function HomePart2() {
           gap: 8px;
           padding: 6px 14px;
           background: rgba(0,0,0,0.55);
+          backdrop-filter: blur(10px);
           border-radius: 999px;
           color: #22c55e;
           font-size: 12px;
           font-weight: 700;
           z-index: 4;
+          transition: all 0.3s ease;
+        }
+
+        .dr-card:hover .dr-open {
+          background: rgba(0,0,0,0.75);
+          transform: scale(1.05);
         }
 
         .dr-dot {
@@ -205,9 +249,19 @@ export default function HomePart2() {
           background: #22c55e;
           border-radius: 50%;
           box-shadow: 0 0 10px #22c55e;
+          animation: pulse 2s ease-in-out infinite;
         }
 
-        /* ✅ FIXED TAGS */
+        @keyframes pulse {
+          0%, 100% {
+            box-shadow: 0 0 10px #22c55e;
+          }
+          50% {
+            box-shadow: 0 0 20px #22c55e, 0 0 30px #22c55e;
+          }
+        }
+
+        /* TAGS */
         .dr-tags {
           position: absolute;
           top: 16px;
@@ -215,6 +269,11 @@ export default function HomePart2() {
           display: flex;
           gap: 8px;
           z-index: 4;
+          transition: all 0.3s ease;
+        }
+
+        .dr-card:hover .dr-tags {
+          transform: translateY(-4px);
         }
 
         .dr-tag {
@@ -229,11 +288,24 @@ export default function HomePart2() {
           color: #1f2937;
           box-shadow: 0 6px 18px rgba(0,0,0,0.18);
           white-space: nowrap;
+          transition: all 0.3s ease;
         }
 
+        .dr-card:hover .dr-tag {
+          background: rgba(255,255,255,1);
+          box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+        }
+
+        /* CONTENT */
         .dr-content {
           padding: 24px 24px 28px;
           text-align: left;
+          position: relative;
+          transition: all 0.3s ease;
+        }
+
+        .dr-card:hover .dr-content {
+          padding-bottom: 32px;
         }
 
         .dr-name {
@@ -242,12 +314,23 @@ export default function HomePart2() {
           font-weight: 700;
           color: #5b1a1d;
           margin-bottom: 6px;
+          transition: all 0.3s ease;
+        }
+
+        .dr-card:hover .dr-name {
+          color: #7d2629;
+          transform: translateX(4px);
         }
 
         .dr-location {
           font-size: 0.95rem;
           color: #6b7280;
           margin-bottom: 14px;
+          transition: all 0.3s ease;
+        }
+
+        .dr-card:hover .dr-location {
+          color: #5b1a1d;
         }
 
         .dr-desc {
@@ -255,18 +338,35 @@ export default function HomePart2() {
           color: #4b5563;
           line-height: 1.65;
           margin-bottom: 16px;
+          transition: all 0.3s ease;
+        }
+
+        .dr-card:hover .dr-desc {
+          color: #374151;
         }
 
         .dr-divider {
           height: 1px;
           background: #eee;
           margin-bottom: 14px;
+          transition: all 0.3s ease;
+        }
+
+        .dr-card:hover .dr-divider {
+          background: #5b1a1d;
+          height: 2px;
         }
 
         .dr-open-now {
           font-size: 0.9rem;
           color: #374151;
           margin-bottom: 16px;
+          transition: all 0.3s ease;
+        }
+
+        .dr-card:hover .dr-open-now {
+          color: #5b1a1d;
+          font-weight: 600;
         }
 
         .dr-specialties {
@@ -282,8 +382,16 @@ export default function HomePart2() {
           font-size: 0.8rem;
           border-radius: 10px;
           font-weight: 600;
+          transition: all 0.3s ease;
         }
 
+        .dr-card:hover .dr-specialty {
+          background: #5b1a1d;
+          color: #ffffff;
+          transform: translateY(-2px);
+        }
+
+        /* VIEW ALL BUTTON */
         .dr-view-all {
           margin-top: 70px;
           display: flex;
@@ -298,6 +406,48 @@ export default function HomePart2() {
           color: #ffffff;
           font-weight: 700;
           cursor: pointer;
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+          box-shadow: 0 8px 20px rgba(91, 26, 29, 0.25);
+        }
+
+        .dr-view-all button:hover {
+          background: #7d2629;
+          transform: translateY(-4px);
+          box-shadow: 0 16px 40px rgba(91, 26, 29, 0.35);
+        }
+
+        .dr-view-all button:active {
+          transform: translateY(-2px);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+          .dr-title {
+            font-size: 2.2rem;
+          }
+
+          .dr-grid {
+            grid-template-columns: 1fr;
+            gap: 30px;
+          }
+
+          .dr-card:hover {
+            transform: translateY(-12px) scale(1.01);
+          }
+        }
+
+        /* SMOOTH SCROLL */
+        * {
+          scroll-behavior: smooth;
+        }
+
+        /* PERFORMANCE OPTIMIZATION */
+        .dr-image img {
+          will-change: transform;
+        }
+
+        .dr-card {
+          will-change: transform, box-shadow;
         }
       `}</style>
 
@@ -323,7 +473,7 @@ export default function HomePart2() {
           {filtered.map((r) => (
             <div key={r.id} className="dr-card">
               <div className="dr-image">
-                <img src={r.image} alt={r.name} />
+                <img src={r.image} alt={r.name} loading="lazy" />
 
                 {r.isOpen && (
                   <div className="dr-open">
