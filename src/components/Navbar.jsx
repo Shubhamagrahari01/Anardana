@@ -1,10 +1,10 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import {  useNavigate } from "react-router-dom";
 
 export default function AnardanaHeader() {
   const [scrolled, setScrolled] = useState(false);
-    const navigate = useNavigate();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const onScroll = () => {
@@ -17,128 +17,129 @@ export default function AnardanaHeader() {
   return (
     <header className={`navbar-wrapper ${scrolled ? "scrolled" : ""}`}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Baskervville:ital@0;1&family=Cinzel:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Baskervville&family=Cinzel:wght@400;600;700&display=swap');
 
-        * {
-          box-sizing: border-box;
-        }
+        * { box-sizing: border-box; }
 
-        /* ===== Wrapper (Sticky + floating) ===== */
         .navbar-wrapper {
-        height: 72px;
           position: sticky;
-          top: 16px;
+          top: 10px;
           z-index: 1000;
           display: flex;
           justify-content: center;
-          /* REMOVED margin-bottom: 24px; */
         }
 
-        /* ===== Main Navbar ===== */
         .anardana-header {
-          width: calc(100% - 80px);
+          width: 95%;
           max-width: 1400px;
-          padding: 16px 36px;
+          padding: 14px 24px;
           display: flex;
           align-items: center;
           justify-content: space-between;
-          border-radius: 22px;
-          background: rgba(25, 20, 18, 0.55);
+          border-radius: 18px;
+          background: rgba(25,20,18,0.65);
           backdrop-filter: blur(14px);
-          -webkit-backdrop-filter: blur(14px);
-          box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55);
-          transition: all 0.35s ease;
+          transition: 0.3s ease;
         }
 
-        /* ===== On Scroll Effect ===== */
-        .navbar-wrapper.scrolled .anardana-header {
-          background: rgba(43, 24, 16, 0.75);
-          backdrop-filter: blur(18px);
-          box-shadow: 0 10px 35px rgba(0, 0, 0, 0.65);
-        }
-
-        /* ===== Logo ===== */
         .logo {
           font-family: 'Cinzel', serif;
-          font-size: 1.9rem;
+          font-size: 1.6rem;
           font-weight: 700;
-          color: #ffffff;
-          white-space: nowrap;
+          color: white;
         }
 
-        /* ===== Navigation ===== */
         nav {
           display: flex;
-          gap: 34px;
+          gap: 30px;
         }
 
         .nav-link {
           font-family: 'Baskervville', serif;
           color: #e8dcc4;
           text-decoration: none;
-          position: relative;
-          padding-bottom: 6px;
-          transition: color 0.3s ease;
+          transition: 0.3s;
         }
 
-        .nav-link:hover {
-          color: #ffffff;
-        }
+        .nav-link:hover { color: white; }
 
-        .nav-link.active {
-          color: #ffffff;
-        }
-
-        .nav-link.active::after {
-          content: '';
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          width: 100%;
-          height: 2px;
-          background: #f2c94c;
-          border-radius: 2px;
-        }
-
-        /* ===== Buttons ===== */
         .action-buttons {
           display: flex;
-          gap: 14px;
+          gap: 12px;
         }
 
         .btn {
-          padding: 10px 22px;
+          padding: 8px 18px;
           border-radius: 999px;
-          font-family: 'Baskervville', serif;
-          font-size: 0.95rem;
-          cursor: pointer;
+          font-size: 0.9rem;
           border: none;
-          transition: all 0.3s ease;
+          cursor: pointer;
         }
 
         .btn-find {
-          background: rgba(255, 255, 255, 0.08);
-          color: #fff;
-          border: 1px solid rgba(255, 255, 255, 0.25);
-        }
-
-        .btn-find:hover {
-          background: rgba(255, 255, 255, 0.15);
+          background: rgba(255,255,255,0.08);
+          color: white;
+          border: 1px solid rgba(255,255,255,0.3);
         }
 
         .btn-book {
           background: #6d0f2b;
-          color: #fff;
+          color: white;
         }
 
-        .btn-book:hover {
-          background: #8b1538;
+        /* Hamburger */
+        .hamburger {
+          display: none;
+          flex-direction: column;
+          cursor: pointer;
+          gap: 5px;
         }
 
-        /* ===== Responsive ===== */
+        .hamburger span {
+          width: 25px;
+          height: 3px;
+          background: white;
+          border-radius: 3px;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+          position: fixed;
+          top: 0;
+          right: ${menuOpen ? "0" : "-100%"};
+          width: 75%;
+          height: 100vh;
+          background: #1b120f;
+          padding: 80px 30px;
+          display: flex;
+          flex-direction: column;
+          gap: 25px;
+          transition: 0.4s ease;
+          z-index: 999;
+        }
+
+        .mobile-menu a {
+          color: white;
+          font-size: 1.2rem;
+          text-decoration: none;
+        }
+
+        .mobile-buttons {
+          margin-top: 20px;
+          display: flex;
+          flex-direction: column;
+          gap: 15px;
+        }
+
+        /* Responsive */
         @media (max-width: 900px) {
-          nav {
+          nav,
+          .action-buttons {
             display: none;
+          }
+
+          .hamburger {
+            display: flex;
           }
         }
       `}</style>
@@ -153,18 +154,37 @@ export default function AnardanaHeader() {
           <NavLink to="/locations" className="nav-link">Restaurants</NavLink>
           <NavLink to="/gallery" className="nav-link">Gallery</NavLink>
           <NavLink to="/contact" className="nav-link">Contact</NavLink>
-           <NavLink to="/reservations" className="nav-link">Reservations</NavLink>
         </nav>
 
         <div className="action-buttons">
-          <button className="btn btn-find"
-           onClick={() => navigate("/locations")}
-          
-          >📍 Find Outlet</button>
-          <button
-            className="btn btn-book"
-            onClick={() => navigate("/reservations")}
-          >
+          <button className="btn btn-find" onClick={() => navigate("/locations")}>
+            📍 Find Outlet
+          </button>
+          <button className="btn btn-book" onClick={() => navigate("/reservations")}>
+            Book Table
+          </button>
+        </div>
+
+        <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+
+      <div className="mobile-menu">
+        <NavLink to="/" onClick={() => setMenuOpen(false)}>Home</NavLink>
+        <NavLink to="/about" onClick={() => setMenuOpen(false)}>About</NavLink>
+        <NavLink to="/menu" onClick={() => setMenuOpen(false)}>Menu</NavLink>
+        <NavLink to="/locations" onClick={() => setMenuOpen(false)}>Restaurants</NavLink>
+        <NavLink to="/gallery" onClick={() => setMenuOpen(false)}>Gallery</NavLink>
+        <NavLink to="/contact" onClick={() => setMenuOpen(false)}>Contact</NavLink>
+
+        <div className="mobile-buttons">
+          <button className="btn btn-find" onClick={() => navigate("/locations")}>
+            📍 Find Outlet
+          </button>
+          <button className="btn btn-book" onClick={() => navigate("/reservations")}>
             Book Table
           </button>
         </div>
